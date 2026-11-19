@@ -1,5 +1,1 @@
-[
-  { "file": "1-checklist.jpg", "path": "/", "viewport": { "width": 1280, "height": 800 } },
-  { "file": "2-silver.jpg", "path": "/", "grade": "silver", "viewport": { "width": 1280, "height": 800 } },
-  { "file": "3-bronze.jpg", "path": "/", "grade": "bronze", "scroll": 1400, "viewport": { "width": 1280, "height": 800 } }
-]
+[{"file":"1-checklist.jpg","note":"Checklist with mid-run progress seeded (14 of 55 earned): header progress, grade counts, filters and the first trophies","path":"/","viewport":{"height":800,"width":1280}},{"file":"2-guide.jpg","note":"Guide panel for Positive Mental Attitude, the missable Chapter 1 meditation trophy: missable warning, full guide and cited sources","path":"/?trophy=28","viewport":{"height":800,"width":1280}},{"file":"3-roadmap.jpg","note":"Roadmap to the platinum: the five stages in order, with the stage 1 missable warning","path":"/?view=roadmap","viewport":{"height":800,"width":1280}},{"file":"4-missable.jpg","note":"Missable filter: the one missable trophy flagged, with the note explaining why it is the only one","path":"/?filter=missable","viewport":{"height":800,"width":1280}}]

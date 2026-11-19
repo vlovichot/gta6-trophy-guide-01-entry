@@ -3,23 +3,109 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA VI trophy checklist</title>
+<title>Leonida Legend — GTA VI Trophy Guide &amp; Tracker</title>
+<meta name="description" content="Offline guide and tracker for all 55 Grand Theft Auto VI PlayStation 5 trophies: official names, descriptions and grades, a cited guide for every trophy, a roadmap to the platinum and every missable flagged.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>GTA VI trophy checklist</h1>
-  <p id="progress">0 of 55 earned</p>
+<header class="hero">
+  <div class="hero-inner">
+    <p class="kicker">Grand Theft Auto VI · PlayStation 5 · Offline guide &amp; tracker</p>
+    <h1>Leonida Legend</h1>
+    <p class="tagline">Every one of the 55 trophies, with the official list, a cited guide for each,
+      a five-stage roadmap to the platinum — and the one missable flagged before it can bite.</p>
+    <div class="progress-wrap" aria-label="Overall progress">
+      <div class="progress-meta">
+        <span id="progressText">0 of 55 earned</span>
+        <span id="progressPct">0%</span>
+      </div>
+      <div class="progress-bar"><div id="progressFill"></div></div>
+      <ul class="grade-counts" id="gradeCounts">
+        <li><span class="dot platinum"></span>Platinum <strong id="count-platinum">0/1</strong></li>
+        <li><span class="dot gold"></span>Gold <strong id="count-gold">0/2</strong></li>
+        <li><span class="dot silver"></span>Silver <strong id="count-silver">0/6</strong></li>
+        <li><span class="dot bronze"></span>Bronze <strong id="count-bronze">0/46</strong></li>
+      </ul>
+    </div>
+    <div class="hero-actions">
+      <button id="exportBtn" type="button">Export progress</button>
+      <label class="import-label">Import progress <input id="importFile" type="file" accept="application/json"></label>
+      <label class="spoiler-toggle"><input id="spoilerToggle" type="checkbox"> Spoiler shield: hide unearned story trophies</label>
+    </div>
+  </div>
 </header>
-<div class="controls">
-  <label>Grade <select id="grade"><option value="all">All</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
-  <button id="export" type="button">Export progress</button>
-  <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
-</div>
-<table>
-  <thead><tr><th>Earned</th><th>Trophy</th><th>Grade</th><th>How to get it</th></tr></thead>
-  <tbody id="rows"></tbody>
-</table>
+
+<nav class="view-tabs" aria-label="Views">
+  <button id="tabChecklist" type="button" class="tab active">Checklist</button>
+  <button id="tabRoadmap" type="button" class="tab">Roadmap to the Platinum</button>
+</nav>
+
+<main>
+  <section id="checklistView">
+    <div class="filter-bar" role="group" aria-label="Filters">
+      <div class="chips" id="kindChips">
+        <button type="button" data-filter="all" class="chip active">All 55</button>
+        <button type="button" data-filter="story" class="chip">Story</button>
+        <button type="button" data-filter="missable" class="chip chip-missable">⚠ Missable</button>
+        <button type="button" data-filter="collectibles" class="chip">Collectibles</button>
+        <button type="button" data-filter="activities" class="chip">Activities</button>
+        <button type="button" data-filter="online" class="chip">Online</button>
+      </div>
+      <label>Grade
+        <select id="gradeFilter">
+          <option value="all">All grades</option>
+          <option value="platinum">Platinum</option>
+          <option value="gold">Gold</option>
+          <option value="silver">Silver</option>
+          <option value="bronze">Bronze</option>
+        </select>
+      </label>
+      <label>Search <input id="searchBox" type="search" placeholder="Name, mission, keyword…"></label>
+      <label class="hide-earned"><input id="hideEarned" type="checkbox"> Hide earned</label>
+    </div>
+    <p id="filterNote" class="filter-note" hidden></p>
+    <p id="resultCount" class="result-count"></p>
+    <ol id="trophyList" class="trophy-list"></ol>
+    <p id="emptyState" class="empty" hidden>No trophies match these filters.</p>
+  </section>
+
+  <section id="roadmapView" hidden>
+    <div class="roadmap-intro">
+      <h2>The road to Vice Got a Price!</h2>
+      <p>One playthrough, roughly 200 hours by the PowerPyx roadmap's estimate, and only one trophy that can be
+        lost along the way. Work the stages in order: the story first with its single missable watched, strangers and
+        partner feats next, the counted grinds third, free-roam feats and the money loop fourth, and the 100%
+        checklist sweep last. Keep a manual save at the start of every chapter — GTA VI has no mission replay —
+        and leave cheats off, as launch reporting says they disable trophies.</p>
+    </div>
+    <div id="roadmapStages"></div>
+  </section>
+</main>
+
+<dialog id="detailDialog" aria-labelledby="detailName">
+  <article class="detail">
+    <button id="detailClose" type="button" class="detail-close" aria-label="Close">×</button>
+    <p class="detail-chips" id="detailChips"></p>
+    <h2 id="detailName"></h2>
+    <p class="detail-desc" id="detailDesc"></p>
+    <p class="detail-missable" id="detailMissable" hidden></p>
+    <h3>Guide</h3>
+    <p class="detail-guide" id="detailGuide"></p>
+    <h3>Sources</h3>
+    <ul class="detail-sources" id="detailSources"></ul>
+    <label class="detail-earned"><input id="detailEarned" type="checkbox"> I have earned this trophy</label>
+  </article>
+</dialog>
+
+<footer>
+  <p>Trophy names, descriptions and grades are the official PlayStation list, as published by Exophase and
+    PSNProfiles and cross-checked at <a href="https://www.planetgta6.com/en/gta-6-trophies/" target="_blank" rel="noopener">Planet GTA 6</a>.
+    Guides are written for this entry in our own words, following the
+    <a href="https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/" target="_blank" rel="noopener">PowerPyx trophy guide &amp; roadmap</a>
+    and <a href="https://outputlag.com/guides/gta-6-trophy-list/" target="_blank" rel="noopener">Output Lag's trophy list</a> — each trophy's own sources are listed in its guide panel.
+    This app runs fully offline; progress lives only in your browser.</p>
+</footer>
+
 <script type="module" src="app.js"></script>
 </body>
 </html>
